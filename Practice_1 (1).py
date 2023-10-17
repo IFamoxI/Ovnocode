@@ -54,9 +54,9 @@ for T in range(500,751,10):
     CD_list=([0])
     
     
-print(CAall[0])
-print(k1_list)
-print(k2_list)
-print(k3_list)
+print(CAall[-1])
+#print(k1_list)
+#print(k2_list)
+#print(k3_list)
 
 
