@@ -1,8 +1,6 @@
 import math
 import matplotlib.pyplot as plt
 
-
-
 k1=0.4
 k2=0.2
 T580 = 580
@@ -56,11 +54,6 @@ for T in range(500, 751, 10):
     CAall.append(CA_list)
     CBall.append(CB_list)
     CCall.append(CC_list)
-
-print('CAall', CAall[24])
-print('CBall', CBall[24])
-print('CCall', CCall[24])
-
 
 print('Сумма концентраций продуктов равна ', CAall[-1][-1]+CBall[-1][-1]+CCall[-1][-1])
 
