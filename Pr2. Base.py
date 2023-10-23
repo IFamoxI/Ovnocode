@@ -55,14 +55,12 @@ for T in range(500, 751, 10):
     CBall.append(CB_list)
     CCall.append(CC_list)
 
-print('Сумма концентраций продуктов равна ', CAall[-1][-1]+CBall[-1][-1]+CCall[-1][-1])
-
 plt.figure
 plt.subplot(1,2,1)
 x = [i for i in range(201)]
 plt.title("Изменение концентрации при Т=500К")
-plt.xlabel("Time")
-plt.ylabel("Concentration")
+plt.xlabel("Вермя")
+plt.ylabel("Концентрация, моль/л")
 plt.plot(x, CAall[24], color='r', label='CA')
 plt.plot(x, CBall[24], color='g', label='CB')
 plt.plot(x, CCall[24], color='b', label='CC')
@@ -71,8 +69,8 @@ plt.legend()
 plt.subplot(1,2,2)
 x = [i for i in range(201)]
 plt.title("Изменение концентрации при Т=750К")
-plt.xlabel("Time")
-plt.ylabel("Concentration")
+plt.xlabel("Время")
+plt.ylabel("Концентрация, моль/л")
 plt.plot(x, CAall[25], color='r', label='CA')
 plt.plot(x, CBall[25], color='g', label='CB')
 plt.plot(x, CCall[25], color='b', label='CC')

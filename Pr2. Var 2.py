@@ -1,12 +1,11 @@
-import math
 import matplotlib.pyplot as plt
 
-k1=0.2  #20000000000
-k2=0.4  #40000000000
+k1=0.2  
+k2=0.4  
 R=8.31
 E1=11,514*10**4
 E2=9,524*10**4
-h=0.00000005  #integration step
+h=0.25  #integration step
 
 CA_list=[0.3]
 CB_list=[0]

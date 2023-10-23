@@ -11,6 +11,9 @@ CBall=[]
 CCall=[]
 CDall=[]
 CEall=[]
+XA_list=[]
+XD_list=[]
+XE_list=[]
 h=0.0005
 
 for T in range(500, 751, 10):
@@ -41,14 +44,36 @@ for T in range(500, 751, 10):
 
 
 plt.figure
+plt.subplot(1,2,1)
 x = [i for i in range(2001)]
 plt.title("Изменение концентрации при Т=750К")
 plt.xlabel("Время")
-plt.ylabel("Концентрация")
+plt.ylabel("Концентрация, моль/л")
 plt.plot(x, CAall[25], label="CA")
 plt.plot(x, CBall[25], label="CB")
 plt.plot(x, CCall[25], label="CC")
 plt.plot(x, CDall[25], label="CD")
 plt.plot(x, CEall[25], label="CE")
+plt.legend()
+
+
+plt.subplot(1,2,2)
+plt.title("Зависимость степени превращения от температуры")
+plt.xlabel("Температура, К")
+plt.ylabel("Степень превращения, %")
+i=0
+while i <= len (CAall)-1:
+    XA=1-(CAall[i][-1]/CAall[i][0])
+    XA_list.append(XA)
+    XD=1-(CDall[i][-1]/CDall[i][0])
+    XD_list.append(XD)
+    XE=1-(CEall[i][-1]/CEall[i][0])
+    XE_list.append(XE)
+    i+=1
+    
+T=range(500,751,10)
+plt.plot(T, XA_list, label="XA")
+plt.plot(T, XD_list, label="XD")
+plt.plot(T, XE_list, label="XE")
 plt.legend()
 plt.show()
