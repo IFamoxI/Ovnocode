@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 
-k1=0.2  
-k2=0.4  
-R=8.31
-E1=11,514*10**4
-E2=9,524*10**4
-h=0.0005  #integration step
+k1 = 0.2  
+k2 = 0.4  
+R = 8.31
+E1 = 11,514*10**4
+E2 = 9,524*10**4
+h = 0.25 #integration step
 
 
 def next(C, a1, a2, a3, a4):
