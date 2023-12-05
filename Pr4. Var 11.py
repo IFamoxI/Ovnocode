@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import math
 
-V1 = 2.3*10**-4
-V2 = 5.1*10**-4
+V1 = 2.3 * 10**-4
+V2 = 5.1 * 10**-4
 p1 = 890
 p2 = 1030
 C1 = 3000
@@ -24,7 +24,7 @@ while T1[-1] - T2[-1] > 2:
 plt.figure()
 plt.subplot(1, 2, 1)
 x = range(len(T1))
-plt.title("прямоточный теплообменник")
+plt.title("Прямоточный теплообменник")
 plt.xlabel("L")
 plt.ylabel("Т")
 plt.plot(x, T1, label="T1")
@@ -42,7 +42,7 @@ while T22[-1] > 35:
     
 plt.subplot(1, 2, 2)
 X = range(len(T11))
-plt.title("противоточный теплообменник")
+plt.title("Противоточный теплообменник")
 plt.xlabel("L")
 plt.ylabel("Т")
 plt.plot(X, T11, label="T1")
