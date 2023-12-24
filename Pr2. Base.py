@@ -1,78 +1,67 @@
-import math
 import matplotlib.pyplot as plt
 
-k1=0.4
-k2=0.2
-T580 = 580
-R=round(8.31, 2)
-E1=round(10.351*10**4, 1)
-E2=round(9.180*10**4, 1)
-h=0.00000005  #integration step
+k1=0.45
+kn1=0.035   
+k2=0.33
+k3=0.21
+kn3=0.1
+h=0.02 #integration step
 
-CAall=[]
-CBall=[]
-CCall=[]
+CH2_list=[0.6]
+Cz_list=[1.0]
+CzH2_list=[0]
+CC7H8_list=[0.4]
+CzC7H8H2_list=[0]
+CCH4_list=[0]
+CC6H6_list=[0]
 
+for time in range(2000):
+    
+    r1=k1*CH2_list[-1]*Cz_list[-1]
+    rn1=kn1*CzH2_list[-1]
+    r2=k2*CzH2_list[-1]*CC7H8_list[-1]
+    r3=k3*CzC7H8H2_list[-1]
+    rn3=kn3*Cz_list[-1]*CCH4_list[-1]*CC6H6_list[-1]
+    
+    Cz=Cz_list[-1]+h*(-r1+rn1+r3-rn3)
+    Cz_list.append(Cz)
 
-for T in range(500, 751, 10):
-    CA_list=[round(0.7, 2)]
-    CB_list=[0]
-    CC_list=[0]
-    k1=k1*math.exp((E1/R)*((1/T580)-(1/T)))
-    k2=k2*math.exp((E2/R)*((1/T580)-(1/T)))
-    print(T)
-    print('k1 ', k1)
-    print('k2 ', k2)
+    CzH2=CzH2_list[-1]+h*(r1-rn1-r2)
+    CzH2_list.append(CzH2)
 
-    for time in range(200):
-        
-        F_CA=-k1*CA_list[-1]-k2*CA_list[-1]
-        F_CB=k1*CA_list[-1]
-        F_CC=k2*CA_list[-1]
+    CzC7H8H2=CzC7H8H2_list[-1]+h*(r2-r3+rn3)
+    CzC7H8H2_list.append(CzC7H8H2)
 
-        Aa1=h*(F_CA)
-        Aa2=h*(F_CA+(Aa1/2))
-        Aa3=h*(F_CA+(Aa2/2))
-        Aa4=h*(F_CA+Aa3)
-        CA=CA_list[-1]+h/6*(Aa1+2*Aa2+2*Aa3+Aa4)
-        CA_list.append(CA)
+    CH2=CH2_list[-1]+h*(-r1+rn1)
+    CH2_list.append(CH2) 
 
-        Ba1=h*(F_CB)
-        Ba2=h*(F_CB+Ba1/2)
-        Ba3=h*(F_CB+Ba2/2)
-        Ba4=h*(F_CB+Ba3)
-        CB=CB_list[-1]+h/6*(Ba1+Ba2*2+Ba3*2+Ba4)
-        CB_list.append(CB)
+    CC7H8=CC7H8_list[-1]+h*(-r2)
+    CC7H8_list.append(CC7H8)
 
-        Ca1=h*(F_CC)
-        Ca2=h*(F_CC+Ca1/2)
-        Ca3=h*(F_CC+Ca2/2)
-        Ca4=h*(F_CC+Ca3)
-        CC=CC_list[-1]+h/6*(Ca1+Ca2*2+Ca3*2+Ca4)
-        CC_list.append(CC)
+    CC6H6=CC6H6_list[-1]+h*(r3-rn3)
+    CC6H6_list.append(CC6H6)
 
-    CAall.append(CA_list)
-    CBall.append(CB_list)
-    CCall.append(CC_list)
+    CCH4=CCH4_list[-1]+h*(r3-rn3)
+    CCH4_list.append(CCH4)
 
 plt.figure
 plt.subplot(1,2,1)
-x = [i for i in range(201)]
-plt.title("Изменение концентрации при Т=500К")
-plt.xlabel("Вермя")
+plt.title("Изменение концентрации по времени основных продуктов")
+plt.xlabel("Время")
 plt.ylabel("Концентрация, моль/л")
-plt.plot(x, CAall[24], color='r', label='CA')
-plt.plot(x, CBall[24], color='g', label='CB')
-plt.plot(x, CCall[24], color='b', label='CC')
+t=range(2001)
+plt.plot(t, CH2_list, label='H2')
+plt.plot(t, CC7H8_list, label='C7H8')
+plt.plot(t, CC6H6_list, label='C6H6')
+plt.plot(t, CCH4_list, label='CH4')
 plt.legend()
 
 plt.subplot(1,2,2)
-x = [i for i in range(201)]
-plt.title("Изменение концентрации при Т=750К")
+plt.title("Изменение концентрации по времени побочных продуктов")
 plt.xlabel("Время")
 plt.ylabel("Концентрация, моль/л")
-plt.plot(x, CAall[25], color='r', label='CA')
-plt.plot(x, CBall[25], color='g', label='CB')
-plt.plot(x, CCall[25], color='b', label='CC')
+plt.plot(t, Cz_list, label='z')
+plt.plot(t, CzH2_list, label='zH2')
+plt.plot(t, CzC7H8H2_list, label='zC7H8H2')
 plt.legend()
 plt.show()
